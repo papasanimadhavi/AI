@@ -1,0 +1,50 @@
+ol=[]
+cl=[]
+path=[]
+def new(l,ol,a,b):
+    if l[0]<a:
+        ol.insert(0,[a,l[1]])
+    if l[1]<b:
+        ol.insert(0,[l[0],b])
+    if l[0]>0:
+        ol.insert(0,[0,l[1]])
+    if l[1]>0:
+        ol.insert(0,[l[0],0])
+    if l[0]+l[1]<=a and l[1]>0:
+        ol.insert(0,[l[0]+l[1],0])
+    if l[0]+l[1]<=b and l[0]>0:
+        ol.insert(0,[0,l[0]+l[1]])
+    if l[0]+l[1]>=a and l[1]>0:
+        ol.insert(0,[a,l[1]-(a-l[0])])
+    if l[0]+l[1]>=b and l[0]>0:
+        ol.insert(0,[l[0]-(b-l[1]),b])
+        
+def bfs(ol,cl,goal,a,b):
+    now=ol[0]
+    ol.remove(now)
+    if(now==goal):
+        print("reached")
+        return
+    if now in cl:
+        bfs(ol,cl,goal,a,b)
+    if now not in cl:
+        new(now,ol,a,b)
+        cl.append(now)
+        bfs(ol,cl,goal,a,b)
+        
+a=int(input())
+b=int(input())
+g=int(input())
+initial=[0,0]
+goal=[g,0]
+cl.append(initial)
+new(initial,ol,a,b)
+bfs(ol,cl,goal,a,b)
+print(list(reversed(cl)))
+
+        
+    
+        
+    
+        
+    
