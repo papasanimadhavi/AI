@@ -1,0 +1,35 @@
+def bds(d,start,goal):
+    st=[start,]
+    en=[goal,]
+    vis_s=[]
+    vis_e=[]
+    while(1):
+        s1=st.pop(0)
+        for i in d[s1]:
+            if i not in vis_e:
+                st.append(i)
+            else:
+                vis_s.append(s1)
+                vis_s.append(i)
+                print(vis_s)
+                print(vis_e)
+                print("path founded")
+                return 1
+        vis_s.append(s1)
+        e1=en.pop(0)
+        for i in d[e1]:
+            if i not in vis_s:
+                en.append(i)
+            else:
+                vis_e.append(e1)
+                vis_e.append(i)
+                print(vis_s)
+                print(vis_e)
+                print("path founded")
+                return 1
+        vis_e.append(e1)
+
+d={'a':['b','c'],'b':['d','e'],'c':['f','g'],'d':['b'],'e':['b'],'f':['c'],'g':['c']}
+start='a'
+end='g'
+bds(d,start,end)
