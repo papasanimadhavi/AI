@@ -86,6 +86,7 @@ def astar(goal):
     while open_list.empty()==False:
         heu_cost,now=open_list.get()
         if now==goal:
+            closed_list.append(now)
             print("min cost required is",cost)
             break
         closed_list.append(now)
