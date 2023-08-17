@@ -1,43 +1,47 @@
-open_list=[]
-closed_list=[]
-path=[]
-def new(l,open_list,i,j):
-    if(l[0]<i):
-        open_list.insert(0,[i,l[1]])
-    if(l[1]<j):
-        open_list.insert(0,[l[0],j])
-    if(l[0]>0):
-        open_list.insert(0,[0,l[1]])
-    if(l[1]>0):
-        open_list.insert(0,[l[0],0])
-    if l[0]+l[1]<=i and l[1]>0:
-        open_list.insert(0,[l[0]+l[1],0])
-    if l[0]+l[1]<=j and l[0]>0:
-        open_list.insert(0,[0,l[0]+l[1]])
-    if l[0]+l[1]>=j and l[0]>0:
-        open_list.insert(0,[l[0]-(j-l[1]),j])
-    if l[0]+l[1]>=i and l[1]>0:
-        open_list.insert(0,[i,l[1]-(i-l[0])])
+def bfs(a,b,c):
+    ol=[]
+    cl=[]
+    p=[]
+    ol.append([0,0])
+    while ol:
+        print("open list :",ol)
+        s=ol.pop()
+        
+        cl.append(s)
+        p.append(s)
+        print("closed list :",cl)
+        if s[0]==c:
+            print("path found")
+            return p
+            
+        if s[0]<a and ([a,s[1]] not in ol and [a,s[1]] not in cl):
+            ol.append([a,s[1]])
+            
+        if s[1]<b and ([s[0],b] not in ol and [s[0],b] not in cl):
+            ol.append([s[0],b])
+            
+        if s[0]>0 and ([0,s[1]] not in ol and [0,s[1]] not in cl):
+            ol.append([0,s[1]])
+            
+        if s[1]>0 and ([s[0],0] not in ol and [s[0],0] not in cl):
+            ol.append([s[0],0])
+            
+        if s[0]+s[1]<=a and s[1]>=0 and ([s[0]+s[1],0] not in ol and [s[0]+s[1],0] not in cl):
+            ol.append([s[0]+s[1],0])
+            
+        if s[0]+s[1]<=b and s[0]>0 and ([0,s[0]+s[1]] not in ol and [0,s[0]+s[1]] not in cl):
+            ol.append([0,s[0]+s[1]])
+            
+        if s[0]+s[1]>=a and s[1]>=0 and ([a,s[1]-(a-s[0])] not in ol and [a,s[1]-(a-s[0])] not in cl):
+            ol.append([a,s[1]-(a-s[0])])
+            
+        if s[0]+s[1]>=b and s[0]>0 and ([s[0]-(b-s[1]),b] not in ol and [s[0]-(b-s[1]),b] not in cl):
+            ol.append([s[0]-(b-s[1]),b])
+        
+    return "No path"
+        
 
-def dfs(open_list,closed_list,goal,i,j):
-    now=open_list[0]
-    open_list.remove(now)
-    if(now==goal):
-        print("reached")
-        return
-    if now in closed_list:
-        dfs(open_list,closed_list,goal,i,j)
-    if now not in closed_list:
-        new(now,open_list,i,j)
-        closed_list.insert(0,now)
-        dfs(open_list,closed_list,goal,i,j)
-
-i=int(input("enter 1st jug amount"))
-j=int(input("enter 2nd jug amount"))
-g=int(input("enter goal state amount"))
-initial=[0,0]
-goal=[g,0]
-closed_list.append(initial)
-new(initial,open_list,i,j)
-dfs(open_list,closed_list,goal,i,j)
-print(list(reversed(closed_list)))
+a=int(input("enter jug1 capacity:"))
+b=int(input('enter jug2 capacity:'))
+c=int(input('enter goal:'))
+bfs(a,b,c)
