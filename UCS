@@ -3,7 +3,7 @@ gr={'a':{'b':3,'c':2},'b':{'d':6,'e':5,'a':3},'c':{'f':5,'a':2},'f':{'g':2,'c':5
 parent={'a':[]}
 close=[]
 path=[]
-def backtrack(now,cost):
+def backtrack(now,cost): 
   if(cost<0):
     return
   if(cost==0):
