@@ -1,7 +1,6 @@
 # MISSIONARIES AND CANNIBALS
 def left_side(s):
 
-
     n1 = s[0][0]
     m1 = s[0][1]
     bl = s[0][2]
