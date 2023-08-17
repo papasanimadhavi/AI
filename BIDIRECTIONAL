@@ -10,9 +10,10 @@ def bds(d,start,goal):
                 st.append(i)
             else:
                 vis_s.append(s1)
-                vis_s.append(i)
-                print(vis_s)
-                print(vis_e)
+                #vis_s.append(i)
+                print("path from start node is :",vis_s)
+                print("Path from goal node is :",vis_e)
+                print("Intersection point is :",vis_s[-1])
                 print("path founded")
                 return 1
         vis_s.append(s1)
